@@ -1,0 +1,76 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    scroll-behavior: smooth;
+  }
+
+  *,
+  *::before,
+  *::after {
+    box-sizing: border-box;
+  }
+
+  body {
+    font-family: var(--font-inter), system-ui, sans-serif;
+    background-color: #FDFAF7;
+    color: #1C1917;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  h1, h2, h3, h4 {
+    font-family: var(--font-playfair), Georgia, serif;
+  }
+
+  /* Focus styles for accessibility */
+  :focus-visible {
+    outline: 2px solid #C4907A;
+    outline-offset: 3px;
+    border-radius: 2px;
+  }
+
+  /* Reduced motion */
+  @media (prefers-reduced-motion: reduce) {
+    *, *::before, *::after {
+      animation-duration: 0.01ms !important;
+      transition-duration: 0.01ms !important;
+    }
+  }
+}
+
+@layer components {
+  .section-label {
+    @apply font-body text-xs tracking-[0.2em] uppercase text-rose font-medium;
+  }
+
+  .btn-primary {
+    @apply inline-flex items-center gap-2 bg-charcoal text-warmwhite font-body text-sm tracking-[0.1em] uppercase px-8 py-4 hover:bg-charcoal-light transition-colors duration-300 focus-visible:outline-rose;
+  }
+
+  .btn-ghost {
+    @apply inline-flex items-center gap-2 border border-charcoal text-charcoal font-body text-sm tracking-[0.1em] uppercase px-8 py-4 hover:bg-charcoal hover:text-warmwhite transition-colors duration-300;
+  }
+
+  .btn-rose {
+    @apply inline-flex items-center gap-2 bg-rose text-warmwhite font-body text-sm tracking-[0.1em] uppercase px-8 py-4 hover:bg-rose-light transition-colors duration-300;
+  }
+}
+
+/* Scroll-triggered fade-up animation */
+.reveal {
+  opacity: 0;
+  transform: translateY(28px);
+  transition: opacity 0.7s ease, transform 0.7s ease;
+}
+
+.reveal.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.reveal-delay-1 { transition-delay: 0.1s; }
+.reveal-delay-2 { transition-delay: 0.2s; }
+.reveal-delay-3 { transition-delay: 0.3s; }
+.reveal-delay-4 { transition-delay: 0.4s; }
