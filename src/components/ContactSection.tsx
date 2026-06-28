@@ -86,9 +86,17 @@ export function ContactSection() {
       return
     }
     setStatus('submitting')
-    // Simulated async submission — replace with your form endpoint
-    await new Promise((r) => setTimeout(r, 1200))
-    setStatus('success')
+    try {
+      const res = await fetch('/api/contact', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(form),
+      })
+      if (!res.ok) throw new Error('Server error')
+      setStatus('success')
+    } catch {
+      setStatus('error')
+    }
   }
 
   return (
@@ -366,6 +374,12 @@ export function ContactSection() {
                     </p>
                   )}
                 </div>
+
+                {status === 'error' && (
+                  <p role="alert" className="font-body text-sm text-rose">
+                    Something went wrong. Please try again or email us directly at reachpixelpetal@gmail.com.
+                  </p>
+                )}
 
                 <button
                   type="submit"
